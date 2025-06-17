@@ -1,0 +1,66 @@
+📄 Project Summary Report: Predicting Patient No-Shows for Telemedicine Appointments
+🧠 Objective:
+To predict whether a patient will miss a scheduled telemedicine appointment using historical appointment and patient-related data. This enables clinics to reduce no-show rates, improve scheduling efficiency, and proactively intervene.
+
+📦 Dataset Overview:
+Total Records: 71,959
+
+Source: Modified version of the Medical Appointment No-Show dataset (Kaggle)
+
+Key Fields:
+
+Demographics: age, gender, neighbourhood
+
+Clinical: hypertension, diabetes, alcoholism, scholarship
+
+Appointment Info: lead_time_days, appointment_mode, reminder_sent, reported_issue
+
+Target: no_show (1 = No-Show, 0 = Showed up)
+
+📊 Exploratory Data Analysis Highlights:
+Most appointments were attended, but ~20% were no-shows.
+
+Reminders reduced no-shows significantly.
+
+Longer lead time between scheduling and appointment increased no-show risk.
+
+Audio appointments had slightly higher no-show tendencies compared to video.
+
+Younger patients and some neighborhoods showed higher no-show patterns.
+
+🤖 Modeling Results:
+Two models were trained and compared:
+
+Model	Accuracy	ROC-AUC
+Logistic Regression	71.4%	0.589
+XGBoost (Selected)	71.1%	0.604 ✅
+
+XGBoost was selected for its better probability calibration and interpretability.
+
+🔍 Top Features from XGBoost
+(Based on model.feature_importances_)
+
+Feature	Interpretation
+reminder_sent	Most influential: sending reminders clearly reduces no-shows
+lead_time_days	Longer wait between booking and appointment = higher risk
+appointment_mode_audio	Audio appointments slightly more likely to be missed
+reported_issue_flu	Common minor complaints (like flu/cold) correlate with more no-shows
+age	Younger age groups were slightly more likely to no-show
+
+See attached chart: feature_importance.png
+
+🎯 Business Recommendations:
+Auto-Reminder System: Prioritize SMS/email/IVR reminders for patients with higher no-show risk.
+
+Appointment Scheduling Policy:
+
+Reduce lead times for first-time or young patients.
+
+Limit audio-only appointments where possible.
+
+Risk-based Overbooking: Slightly overbook high-risk time slots (e.g., long lead-time, Monday mornings).
+
+Dashboard Alerts: Flag likely no-shows to clinic admin for follow-up.
+
+📌 Outcome
+This model helps clinics and telemedicine platforms improve appointment adherence, reduce wasted doctor time, and enable proactive outreach — delivering measurable impact to operational efficiency.
